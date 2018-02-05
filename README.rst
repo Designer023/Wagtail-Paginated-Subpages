@@ -14,15 +14,18 @@ Adds paginated urls under and page where the mixin is used::
 Quick start
 -----------
 
+1. Install "wagtail-paginated-subpages" using pip::
 
-1. Add "wagtail_paginated_subpages" to your INSTALLED_APPS setting like this::
+    pip install wagtail-paginated-subpages
+
+2. Add "wagtail_paginated_subpages" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...
         'wagtail_paginated_subpages',
     ]
 
-2. import the mixin and include it before the Page (or other) classes::
+3. import the mixin and include it before the Page (or other) classes::
 
     from wagtail_paginated_subpages.mixins.pagination import PaginatedMixin
 
@@ -30,7 +33,7 @@ Quick start
 
         pass
 
-3. Use the paginated content in a paginated page template::
+4. Use the paginated content in a paginated page template::
 
     <ul>
         {% for page in paginated_objects %}
@@ -38,12 +41,12 @@ Quick start
         {% endfor %}
     </ul>
 
-4. Use the pagination template tag to add pagination::
+5. Use the pagination template tag to add pagination::
 
     {% load wagtail_paginated_tags %}
     {% render_pagination page=page paginated_objects=paginated_objects %}
 
-5. Navigate to page with child pages and list of child pages should be present
+6. Navigate to page with child pages and list of child pages should be present
 
 
 Customisation
