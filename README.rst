@@ -27,7 +27,8 @@ Quick start
 
 3. Use the paginated content in a paginated page template::
 
-    {% for page in paginated_objects %}
+    <ul>
+        {% for page in paginated_objects %}
             <h2>{{ page.title }}</h2>
         {% endfor %}
     </ul>
