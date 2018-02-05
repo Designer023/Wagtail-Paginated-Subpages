@@ -1,0 +1,15 @@
+{% load wagtail_paginated_tags %}
+
+<link rel="canonical" href="{{ page.url }}">
+
+{% if render_prev_next %}
+    {% if paginated_objects.has_previous %}
+        <link rel="prev" href="{% paginationpageurl page "pagninated_index_page" paginated_objects.previous_page_number "" %}" />
+    {% endif %}
+{% endif %}
+
+{% if render_prev_next %}
+    {% if paginated_objects.has_next %}
+        <link rel="next" href="{% paginationpageurl page "pagninated_index_page" paginated_objects.next_page_number "" %}" />
+    {% endif %}
+{% endif %}

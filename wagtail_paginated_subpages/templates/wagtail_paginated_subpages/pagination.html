@@ -1,0 +1,84 @@
+{% load wagtail_paginated_tags %}
+
+<div class="pagination ">
+
+    {# Page index #}
+    <div class="pagination__displaying">
+        <div class="pagination__displaying-inner">
+            {{ paginated_objects.start_index }}&nbsp;to&nbsp;{{ paginated_objects.end_index }}&nbsp;of&nbsp;{{ paginated_objects.paginator.count }}
+        </div>
+    </div>
+
+
+    {# Pages #}
+    <ul class="pagination__page-controls">
+
+
+        {# First #}
+        <li class="pagination__page pagination__page--first">
+        {% if paginated_objects.has_previous %}
+            <a href="{% paginationpageurl page "pagninated_index_page" 1 pagination_query_string %}" class="pagination__item"><i class="icon icon-chevron-left"></i>First</a>
+        {% else %}
+            <span class="pagination__item is-disabled"><i class="icon icon-chevron-left"></i>First</span>
+        {% endif %}
+         </li>
+
+
+        {# Last #}
+        <li class="pagination__page pagination__page--last">
+        {% if paginated_objects.paginator.num_pages != 1 and paginated_objects.has_next %}
+            <a href="{% paginationpageurl page "pagninated_index_page" paginated_objects.paginator.num_pages pagination_query_string %}" class="pagination__item"><i class="icon icon-chevron-right"></i>Last</a>
+        {% else %}
+            <span class="pagination__item is-disabled"><i class="icon icon-chevron-right"></i>Last</span>
+        {% endif %}
+        </li>
+
+
+        {# Previous #}
+          <li class="pagination__page pagination__page--previous">
+            {% if paginated_objects.has_previous %}
+                <a {% if render_prev_next %}rel="prev"{% endif %} href="{% paginationpageurl page "pagninated_index_page" paginated_objects.previous_page_number pagination_query_string %}" class="pagination__item"><i class="icon icon-chevron-left"></i> Previous</a>
+            {% else %}
+                <span class="pagination__item pagination__item--disabled"><i class="icon icon-chevron-left"></i> Previous</span>
+            {% endif %}
+          </li>
+
+
+        {# Next #}
+        <li class="pagination__page pagination__page--next">
+            {% if paginated_objects.has_next %}
+                {# No logic required for first page one as page 1 can never be next! #}
+                <a {% if render_prev_next %}rel="next"{% endif %} href="{% paginationpageurl page "pagninated_index_page" paginated_objects.next_page_number pagination_query_string %}" class="pagination__item"><i class="icon icon-chevron-right"></i>Next</a>
+            {% else %}
+                <span class="pagination__item pagination__item--disabled"><i class="icon icon-chevron-right"></i>Next</span>
+            {% endif %}
+        </li>
+
+
+        {# Pages by number #}
+        {% for page_num in paginated_objects.paginator.page_range %}
+          <li class="pagination__page">
+            <a href="{% paginationpageurl page "pagninated_index_page" page_num pagination_query_string %}" class="pagination__item {% if page_num == paginated_objects.number %}pagination__item--current{% endif %}">{{ page_num }}</a>
+          </li>
+        {% endfor %}
+
+    </ul>
+
+    {# Page size #}
+    <div class="pagination__show">
+        <div class="pagination__show-inner">
+            <span class="pagination__show-label">Show:</span>
+            <ul class="pagination__show-options">
+                {% for page_size in default_page_sizes %}
+                    <li>
+                    {% if current_page_size == page_size %}
+                        <span class="pagination__show-button pagination__show-button--active">{{ page_size }}</span>
+                    {% else %}
+                        <a href="{{ page.url }}?page_size={{ page_size }}" class="pagination__show-button">{{ page_size }}</a>
+                    {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
