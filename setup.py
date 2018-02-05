@@ -15,9 +15,13 @@ setup(
     license='MIT License',
     description='A pagination plugin app for django wagtail CMS',
     long_description=README,
-    url='https://carl-topham.com/',
+    url='https://github.com/Designer023/Wagtail-Paginated-Subpages',
     author='Carl Topham',
     author_email='carl@carl-topham.com',
+    install_requires=[
+        'django>=1.11,<1.12',
+        'wagtail>=1.13,<1.14'
+    ],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
